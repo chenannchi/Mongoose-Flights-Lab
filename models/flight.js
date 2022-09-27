@@ -20,7 +20,6 @@ const flightSchema = new Schema({
   },
   departs: {
     type: Date,
-    // default: Date.now,
     default:oneYearFromNow
   }
 }, {
@@ -32,8 +31,6 @@ function oneYearFromNow(){
   today.setFullYear(today.getFullYear()+1)
   return today
 }
-
-oneYearFromNow()
 
 // Compile the schema into a model and export it
 const Flight = mongoose.model('Flight', flightSchema)

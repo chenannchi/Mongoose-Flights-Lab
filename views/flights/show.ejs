@@ -8,10 +8,11 @@
       </h1>
       <section>
         <div>Airline</div>
-        <div><%= flight.airline %>
-          <a href="/flights/<%= flight._id %>/edit">
-            <button>Edit Flight</button>
-          </a>
+        <div>
+          <%= flight.airline %>
+            <a href="/flights/<%= flight._id %>/edit">
+              <button>Edit Flight</button>
+            </a>
         </div>
         <div>Airport</div>
         <div>
@@ -25,7 +26,25 @@
         <div>
           <%= flight.departs %>
         </div>
+        <div>Meals:</div>
+        <ul>
+          <% flight.meals.forEach(meal=> { %>
+            <li>
+              <%= meal.name %>
+            </li>
+            <% }) %>
+        </ul>
       </section>
+      <form id="add-per-to-meal" action="/flights/<%= flight._id %>/meals" method="POST">
+        <select name="mealId">
+          <% meals.forEach(meal=> { %>
+            <option value="<%= meal._id %>">
+              <%= meal.name %>
+            </option>
+            <% }) %>
+        </select>
+        <button type="submit">Add to Meals</button>
+      </form>
       <form id="add-ticket-form" action="/flights/<%= flight._id %>/tickets" method="POST">
         <label for="seat-select">Ticket:</label>
         <input name="seat" required pattern="[A-F][1-9]\d?" id="seat-select">
